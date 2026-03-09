@@ -1,0 +1,45 @@
+capitulo 1:
+El objetivi de un hacker ético es evaluar la seguridad de una red, sistema o infraestructura para identificar vulnerabilidades
+antes de que sean expuestas por atacantes reales, el proceso se conoce como pruebas de penetración o pentesting, estas pruebas 
+consisten en analizar posibles vulnerabilidades del sistema, asi mismo intentar explotarlas de una manera controlada para asi 
+determinar los riesgos de las organizaciones.
+
+Las pruebas de penetración son de vitalidad dado a que con ellas podemos descubrir posibles debilidades de ataque que podrían 
+comprometer la seguridad de lo sistemas o la información. por otra parte este primer capitulo se centra en actores de amenaza 
+para las organizaciones, entre algunas están crimen organizado, que busca obtener beneficios económicos mediante robo de datos 
+o ransomware; los hacktivistas que atacan con el fin de difundir información o afectar la reputación de la empresa, los atacantes 
+pueden ser patrocinados por el estado, para realizar tareas de espionaje ciberataques con fines políticos o estratégicos, así mismo
+las amenazas internas puede hacer énfasis a los empleados que pueden ser engañados por ataques o personas externas con intenciones maliciosas
+
+nos explican varios metodologías de pruebas de penetración, entre los tipos de pruebas se incluye las pruebas de infraestructura de red 
+que analizan dispositivos como routers switches firewalls, pruebas basadas en aplicaciones que buscan vulnerabilidades en aplicaciones web 
+y bases de datos, y por ultimo pruebas de penetración en la nube que evalúan entornos en plataformas como aws, azure, GCP donde la seguridad 
+se basa en un modelo de responsabilidad compartida entre el proveedor y el cliente. asi mismo estas pruebas se realizan en tres tipos de entornos 
+de pruebas a. El entorno desconocido (caja negra) donde el evaluador tiene poca información y simula un atacante externo; el entorno conocido 
+(caja blanca)donde el evaluador tiene acceso a información detallada como diagramas de red o código fuente; y el entorno parcialmente conocido 
+(caja gris), que combina elementos de los dos anteriores.
+
+menciona para finalizar el capitulo estándares como MITRE ATT&CK, que documenta tácticas y técnicas de ataque; OWASP, que ofrece guías para pruebas 
+de seguridad en aplicaciones web; NIST SP 800-115, que proporciona lineamientos para pruebas de seguridad; OSSTMM, una metodología de pruebas de seguridad;
+y Penetration Testing Execution Standard, que define las fases de un proceso de pentesting. Estos marcos ayudan a realizar evaluaciones de seguridad 
+estructuradas, repetibles y profesionales.
+
+capitulo 2:
+En este capitulo no hablan directamente de la relacion que existe entre gestion riesgo y cumplimiento dentro de la cibersegurida, 
+especialmente enfocado en pruebas de penetración, antes de realizar este tipo de pruebas es fundamental que  haya una fase de planificación 
+donde se defina el alcance, el publico objetivo, reglas de compromiso, canales de comunicación, el presupuesto, entre otros. con el fin de 
+evitar problemas legales y conflictos mismo con los clientes.
+
+por otra parte destaca la importancia de cumplir normas y regulaciones de seguridad y privacidad,que estandarizan a las organizaciones a 
+proteger la información sensible. para mencionar algunas se encuentral la general data protection regulation que protege los datos 
+personales de los ciudadanos de la UE, PCI DSS La regulación del Estándar de seguridad de datos de la industria de tarjetas de pago, 
+tiene como objetivo proteger el procesamiento de los pagos con tarjeta de crédito y otros tipos de pagos digitales, HIPAAA La intención
+original de la regulación de la Ley de Portabilidad y Responsabilidad de los Seguros de Salud de 1996 (HIPAA) era simplificar y estandarizar 
+los procesos administrativos de los servicios de salud, entre otros, estas regulaciones suelen exigir auditorias de seguridad, pruebas de 
+penetración y controles técnicos como segmentación de redes, administración segura de contraseñas y gestión de claves criptográficas.
+
+Menciona también que los evaluadores de seguridad deben considerar restricciones locales y legales de cada país, debido a que algunas
+ herramientas o procesos pueden estar prohibidas o reguladas. se deben establecer claramente documentos legales como contratos, acuerdos de 
+ confidencialidad(NDA), acuerdos de nivel de servicios(SLA), declaraciones de trabajo(SOW) y acuerdos maestros de servicios (MSA). Por otra 
+ parte explica que los descargos de responslaidad son importantes en los informes de pruebas de penetración ya que puede aclarar los resultados 
+ obtenidos y la situación de seguridad actual, y no garantiza que el sistema este completamente libre de vulnerabilidades a futuro
