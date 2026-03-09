@@ -148,7 +148,22 @@ Nmap done: 1 IP address (1 host up) scanned in 0.12 seconds
 (Título de la página, cabecera del servidor,métodos HTTP permitidos como GET, POST, etc 
 ¿Por qué es peligroso que un atacante sepa que métodos como PUT o DELETE están habilitados?
 Segundo Punto:
+Auditoría Local con Lynis , desarrollar el escaneo de seguridad con el siguiente comando:
 
+¿Qué tipo de recomendaciones de seguridad aparecen? (Ej. falta de un firewall, configuraciones 
+me dejo este warning 
+
+Warnings (1): ---------------------------- ! Couldn't find 2 responsive nameservers [NETW-2705] https://cisofy.com/lynis/controls/NETW-2705/ 
+
+dentro de las muchas recomendaciones las que mas destacan para mi es instalar herramientas adicionales como fail2ban para bloquear intentos de inicio de sesión y debsums para verificar la integridad de paquetes instalados.
+
+
+
+¿Cuál es la sugerencia más crítica queh a encontrado Lynisde SSH, etc.). Lynis asigna una un " hardening index " (índice de endurecimiento). 
+se podría decir que esta: Couldn't find 2 responsive nameservers [NETW-2705], pero considero que en mi caso no tiene sentido ya que no necesito servidores de DNS de respaldo o no le veo funcionalidad en mi caso.
+¿Qué puntuación ha obtenido tu sistema? ¿Cómo podrías mejorarla
+Hardening index : 65 
+tuve este resultado considero que podria mejorarla siguiendo la sugerencias suministradas como instalar las herramientas o paquetes anteriormente nombrados, restringir permisos de archivos importantes, e impolementar servicios de auditoria como auditd
 Tercer Punto:
 1. Búsqueda de rootkits 
 
