@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resumen de Ciberseguridad</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Resumen de Ciberseguridad</h1>
+    <p>Reconocimiento, Explotación y Seguridad</p>
+</header>
+
+<nav>
+    <a href="#cap3">Cap. 3</a>
+    <a href="#cap4">Cap. 4</a>
+    <a href="#cap5">Cap. 5</a>
+    <a href="#cap6">Cap. 6</a>
+    <a href="#cap7">Cap. 7</a>
+    <a href="#cap8">Cap. 8</a>
+    <a href="#cap9">Cap. 9</a>
+    <a href="#cap10">Cap. 10</a>
+</nav>
+
+<main>
+
+<section id="cap3" class="card">
+    <h2>Capítulo 3: Recopilación de Información e Identificación de Vulnerabilidades</h2>
+
+    <h3>Reconocimiento Pasivo</h3>
+    <p>Todo proceso de evaluación de seguridad comienza mucho antes de ejecutar cualquier herramienta. La fase de reconocimiento es, en esencia, la etapa en que el evaluador aprende a conocer su objetivo: quién es, cómo opera y qué ha dejado expuesto sin darse cuenta.
+Esta etapa puede abordarse de dos maneras. El reconocimiento activo implica interactuar directamente con los sistemas del objetivo, lo cual puede generar registros y alertas. El reconocimiento pasivo, en cambio, consiste en obtener información desde fuentes públicas sin que el objetivo tenga ninguna indicación de que está siendo estudiado.
+Entre las técnicas pasivas más utilizadas se encuentran las consultas DNS mediante herramientas como nslookup, dig y DNSRecon; las búsquedas Whois para identificar los responsables administrativos y técnicos de un dominio; y el análisis de certificados SSL a través de sitios como crt.sh para descubrir subdominios que podrían no estar visibles de otra forma.
+Un aspecto que suele subestimarse es la inteligencia de fuentes abiertas (OSINT) proveniente de redes sociales y ofertas de empleo. Un atacante con paciencia puede reconstruir gran parte de la arquitectura tecnológica de una empresa simplemente leyendo los perfiles públicos de sus empleados o las descripciones de puestos que publican. Las imágenes también representan un vector de exposición: los metadatos EXIF embebidos en fotografias pueden revelar coordenadas GPS, el modelo del dispositivo con que fueron tomadas o la versión del sistema operativo del equipo que las editó.
+Otras técnicas incluyen el Google Hacking, que consiste en usar operadores avanzados de búsqueda para localizar información sensible indexada públicamente; la Wayback Machine, que permite revisar versiones históricas de sitios web; y la inspección de repositorios de código público como GitHub, donde en ocasiones los desarrolladores suben credenciales, claves de API o configuraciones internas sin advertirlo.
+Para automatizar este proceso, herramientas como Recon-ng —un marco modular que consulta decenas de fuentes simultáneamente— y Shodan —que indexa dispositivos conectados a Internet, incluyendo cámaras, routers y sistemas industriales expuestos— permiten obtener una visión amplia del objetivo en poco tiempo.
+</p>
+
+   
+    <h3>Reconocimiento Activo y Escaneos con Nmap</h3>
+    <p>Una vez que se cuenta con un mapa general del objetivo, el paso siguiente es interactuar con él de forma más directa. Nmap es la herramienta de referencia para esta etapa. Su versatilidad permite llevar a cabo distintos tipos de escaneo dependiendo del nivel de sigilo y profundidad que se requiera.
+El escaneo SYN —conocido también como escaneo semi-abierto— es el más habitual por ser rápido y difícil de detectar. El escaneo TCP completo establece conexiones reales, lo cual genera más ruido en los registros. El escaneo UDP es necesario para identificar servicios como DNS o SNMP. El escaneo FIN, que emplea paquetes atípicos, resulta útil para eludir ciertos firewalls.
+Las plantillas de tiempo de Nmap, que van de -T0 a -T5, permiten controlar la agresividad del escaneo: T0 es extremadamente lento y sigiloso, mientras que T5 puede saturar la red. Esta configuración es importante porque un escaneo demasiado agresivo puede interrumpir servicios en producción y generar alertas inmediatas.
+Más allá del descubrimiento de puertos, la enumeración es el proceso de extraer información detallada sobre lo que hay detrás de ellos. Mediante el Motor de Scripts de Nmap (NSE) es posible enumerar usuarios de Windows a través de SMB, listar grupos y recursos compartidos, e identificar versiones exactas de servicios.
+Herramientas como enum4linux y enum4linux-ng complementan este proceso en entornos Samba y Windows. Scapy, por su parte, ofrece un nivel de control aún más granular, ya que permite construir paquetes personalizados desde cero mediante Python.
+</p>
+   
+
+    <h3>Escaneo de Vulnerabilidades</h3>
+    <p>Con la información recopilada, el siguiente paso es identificar qué vulnerabilidades existen en los sistemas del objetivo. Un escáner de vulnerabilidades automatiza este proceso en cuatro fases: descubrimiento de activos, sondeo de puertos y servicios, correlación de hallazgos con bases de datos de vulnerabilidades conocidas, y generación de un informe.
+Los escaneos no autenticados ofrecen una perspectiva externa del sistema; los autenticados, que requieren credenciales válidas, permiten un análisis interno mucho más completo. Los escaneos furtivos intentan minimizar la huella generada, mientras que los de cumplimiento verifican la adherencia a normativas como HIPAA o PCI-DSS.
+Un aspecto crítico en esta etapa es la validación de resultados. Entregar un informe cargado de falsos positivos es tan problemático como no encontrar vulnerabilidades reales: consume tiempo del equipo de respuesta y socava la confianza del cliente en los resultados.
+</p>
+
+
+    <h3>Investigación de Vulnerabilidades</h3>
+    <p>Cuando un escáner reporta una vulnerabilidad, eso es solo el punto de partida. Para evaluar correctamente su impacto y urgencia, es necesario recurrir a fuentes especializadas como US-CERT, el CERT de Carnegie Mellon, NIST y su Marco de Ciberseguridad, JPCERT, y las listas CVE y CWE mantenidas por MITRE.
+El CVSS (Sistema Común de Puntuación de Vulnerabilidades) asigna a cada vulnerabilidad una puntuación de 0 a 10 en función de métricas base, temporales y ambientales. Esta puntuación es fundamental para que los equipos de seguridad prioricen las correcciones de manera informáda y eficiente.
+</p>
+
+</section>
+
+<section id="cap4" class="card">
+    <h2>Capítulo 4: Ataques de Ingeniería Social</h2>
+
+    <h3>Pretextos y Suplantación</h3>
+    <p>El principio fundamental de la ingeniería social es que las personas son, con frecuencia, el eslabón más vulnerable de cualquier cadena de seguridad. No importa cuán robusto sea el firewall ni cuántas capas de protección tenga la red: si un atacante logra engañar a un empleado para que entregue sus credenciales o abra un archivo malicioso, toda esa infraestructura pierde relevancia.
+Los ataques de ingeniería social funcionan porque explotan comportamientos humanos naturales y predecibles: la tendencia a confiar en figuras de autoridad, el deseo de ser útil, la respuesta a la urgencia o el miedo a las consecuencias. El pretexto es la construcción de una identidad o historia falsa para ganarse la confianza de la víctima; la suplantación lleva eso un paso más allá al hacerse pasar por una persona o entidad específica.
+El pharming, que consiste en manipular el DNS o el archivo de hosts de la víctima para redirigirla a un sitio malicioso visualmente idéntico al legítimo, es un ejemplo de cómo estos ataques pueden operar de forma completamente silenciosa.</p>
+   
+
+    <h3>Tipos de ataques</h3>
+<p>El phishing sigue siendo el vector de ataque más extendido: correos electrónicos que imitan comunicaciones legítimas e incluyen enlaces o archivos adjuntos maliciosos. Su variante más peligrosa, el spear phishing, incorpora investigación previa sobre la víctima para personalizar el mensaje y hacerlo muchísimo más convincente. El whaling aplica la misma lógica pero apunta a ejecutivos de alto nivel, cuyas decisiones tienen un impacto directo y significativo en la organización.
+El vishing utiliza llamadas telefónicas y el smishing mensajes de texto, ambos con el mismo propósito: obtener información sensible o inducir a la víctima a ejecutar una acción comprometedora. El abandono de USB es una técnica física con una tasa de éxito sorprendentemente alta: estudios reales han demostrado que una proporción considerable de personas conecta una memoria USB encontrada sin verificar su procedencia.
+Los ataques de bebedero (Watering Hole) son más elaborados: el atacante identifica qué sitios web frecuenta su objetivo, compromete uno de ellos inyectando código malicioso, y espera. Es un ataque indirecto que puede pasar completamente desapercibido hasta que ya es demasiado tarde.
+</p>
+
+    <h3>Ataques físicos</h3>
+<p>La seguridad física es una dimensión que muchas organizaciones descuidan en favor de las defensas digitales. El tailgating ocurre cuando alguien ingresa a una zona restringida siguiendo a una persona autorizada sin que ésta lo haya permitido conscientemente; el piggybacking es similar, pero con consentimiento (generalmente fruto de la cortesia).
+El shoulder surfing puede parecer trivial, pero en entornos concurridos como aeropuertos o cafeterías permite capturar contraseñas, números de tarjeta u otra información confidencial con solo mirar la pantalla del dispositivo de alguien. La búsqueda en la basura (Dumpster Diving), aunque rudimentaria, sigue siendo una técnica válida: documentos desechados sin triturar pueden contener información de gran valor para un atacante.
+Como contramedidas, se destacan los vestíbulos de control de acceso, los torniquetes, la vigilancia mediante cámaras y el uso de controles biométricos en zonas sensibles.</p>
+
+    <h3>Métodos de influencia</h3>
+  <p>La seguridad física es una dimensión que muchas organizaciones descuidan en favor de las defensas digitales. El tailgating ocurre cuando alguien ingresa a una zona restringida siguiendo a una persona autorizada sin que ésta lo haya permitido conscientemente; el piggybacking es similar, pero con consentimiento (generalmente fruto de la cortesia).
+El shoulder surfing puede parecer trivial, pero en entornos concurridos como aeropuertos o cafeterías permite capturar contraseñas, números de tarjeta u otra información confidencial con solo mirar la pantalla del dispositivo de alguien. La búsqueda en la basura (Dumpster Diving), aunque rudimentaria, sigue siendo una técnica válida: documentos desechados sin triturar pueden contener información de gran valor para un atacante.
+Como contramedidas, se destacan los vestíbulos de control de acceso, los torniquetes, la vigilancia mediante cámaras y el uso de controles biométricos en zonas sensibles.
+</p>
+</section>
+
+<section id="cap5" class="card">
+    <h2>Capítulo 5: Explotación de Redes Cableadas e Inalámbricas</h2>
+
+    <h3>Ataques en redes cableadas</h3>
+<p>La seguridad física es una dimensión que muchas organizaciones descuidan en favor de las defensas digitales. El tailgating ocurre cuando alguien ingresa a una zona restringida siguiendo a una persona autorizada sin que ésta lo haya permitido conscientemente; el piggybacking es similar, pero con consentimiento (generalmente fruto de la cortesia).
+El shoulder surfing puede parecer trivial, pero en entornos concurridos como aeropuertos o cafeterías permite capturar contraseñas, números de tarjeta u otra información confidencial con solo mirar la pantalla del dispositivo de alguien. La búsqueda en la basura (Dumpster Diving), aunque rudimentaria, sigue siendo una técnica válida: documentos desechados sin triturar pueden contener información de gran valor para un atacante.
+Como contramedidas, se destacan los vestíbulos de control de acceso, los torniquetes, la vigilancia mediante cámaras y el uso de controles biométricos en zonas sensibles.
+</p>
+ 
+    <h3>Ataques inalámbricos</h3>
+    <ul>
+    <p>Las redes Wi-Fi presentan un conjunto propio de vulnerabilidades que merecen tratamiento independiente. Los puntos de acceso no autorizados —dispositivos instalados sin autorización dentro de la red corporativa— pueden ofrecer al atacante una puerta trasera persistente.
+El ataque de gemelo malvado (Evil Twin) consiste en crear una red inalámbrica con el mismo identificador (SSID) que la red legítima. Los dispositivos que se han conectado antes a esa red pueden asociarse automáticamente al punto de acceso malicioso. Los ataques de desautenticación amplifican esto: expulsan a los usuarios legítimos de su red y, cuando intentan reconectarse, el atacante captura el handshake de WPA para descifrar la contraseña fuera de línea.
+El capítulo también aborda vulnerabilidades en WPA3 (incluyendo FragAttacks), ataques de fuerza bruta al PIN de WPS mediante herramientas como Reaver, ataques Bluetooth como Bluejacking y Bluesnarfing, y vulnerabilidades RFID que permiten clonar tarjetas de acceso físico mediante técnicas de amplificación de señal.
+</p>
+</section>
+
+<section id="cap6" class="card">
+    <h2>Capítulo 6: Explotación de Vulnerabilidades en Aplicaciones Web</h2>
+
+    <h3>El Protocolo HTTP </h3>
+<p>Toda evaluación de seguridad web parte de una comprensión sólida del protocolo HTTP. Su modelo de solicitud-respuesta sin estado, la estructura de las URLs, los métodos disponibles (GET, POST, PUT, DELETE), los códigos de respuesta y el mecanismo de gestión de sesiones mediante cookies y tokens son los cimientos sobre los que se construyen la mayoría de las vulnerabilidades web. Un identificador de sesión predecible, corto o expuesto en la URL es suficiente para que un atacante se haga pasar por un usuario legítimo sin necesidad de conocer su contraseña.</p>
+    <h3>Vulnerabilidades de Inyección</h3>
+    <p>La inyección SQL es probablemente la vulnerabilidad web más conocida y, a pesar de los años, sigue siendo devastadoramente común. Cuando una aplicación no valida correctamente la entrada del usuario, un atacante puede insertar instrucciones SQL que la base de datos ejecutará como si fueran legítimas. Las consecuencias van desde la lectura no autorizada de registros hasta la eliminación completa de tablas.
+Existen distintas variantes de este ataque: la inyección en banda devuelve los resultados directamente en la respuesta de la aplicación; la inyección ciega o inferencial no muestra resultados directos, pero el comportamiento de la aplicación delata si la consulta fue válida; y la inyección fuera de banda exfiltra datos a través de canales alternativos como DNS o HTTP. La herramienta SQLmap automatiza la detección y explotación de estas vulnerabilidades.
+La inyección de comandos es aún más grave: permite ejecutar órdenes directamente en el sistema operativo del servidor. La inyección LDAP afecta a aplicaciones que delegan la autenticación en directorios como Active Directory, permitiendo eludir controles de acceso o revelar información del directorio.
+</p>
+
+    <h3>Autenticación y Autorización</h3>
+    <p>Las vulnerabilidades de autenticación abarcan desde el secuestro de sesión mediante tokens predecibles hasta la fuerza bruta de contraseñas con herramientas como Hashcat, John the Ripper o RainbowCrack. Las credenciales predeterminadas que los administradores nunca cambiaron siguen siendo una de las causas más frecuentes de compromiso inicial.
+En el plano de la autorización, las Referencias Directas Inseguras a Objetos (IDOR) son especialmente prevalentes: ocurren cuando la aplicación usa directamente la entrada del usuario para acceder a recursos sin verificar si tiene permiso para hacerlo. Cambiar un identificador numérico en la URL y acceder a los datos de otro usuario es el ejemplo clásico, y sigue apareciendo con frecuencia en auditorías reales.
+</p>
+
+    <h3>XSS y CSRF</h3>
+   <p>El Cross-Site Scripting (XSS) permite inyectar scripts maliciosos en páginas que otros usuarios visitarán. En su variante reflejada, el script se entrega a través de un enlace manipulado. En la variante almacenada, el script queda persistido en el servidor y afecta a todos los visitantes. El XSS basado en DOM ocurre enteramente en el navegador, sin involucrar al servidor en la ejecución del payload.
+La falsificación de solicitudes entre sitios (CSRF) explota la sesión activa de un usuario autenticado para ejecutar acciones en su nombre sin su conocimiento. Si un usuario tiene sesión activa en su banco y visita una página maliciosa, esa página puede hacer que su navegador envíe una solicitud de transferencia al banco. Los tokens anti-CSRF son la contramedida estándar.</p>
+
+    <h3>Código Inseguro y APIs</h3>
+    <p>El Cross-Site Scripting (XSS) permite inyectar scripts maliciosos en páginas que otros usuarios visitarán. En su variante reflejada, el script se entrega a través de un enlace manipulado. En la variante almacenada, el script queda persistido en el servidor y afecta a todos los visitantes. El XSS basado en DOM ocurre enteramente en el navegador, sin involucrar al servidor en la ejecución del payload.
+La falsificación de solicitudes entre sitios (CSRF) explota la sesión activa de un usuario autenticado para ejecutar acciones en su nombre sin su conocimiento. Si un usuario tiene sesión activa en su banco y visita una página maliciosa, esa página puede hacer que su navegador envíe una solicitud de transferencia al banco. Los tokens anti-CSRF son la contramedida estándar.
+</p>
+</section>
+
+<section id="cap7" class="card">
+    <h2>Capítulo 7: Seguridad en la Nube, Movilidad e IoT</h2>
+    <p>El Cross-Site Scripting (XSS) permite inyectar scripts maliciosos en páginas que otros usuarios visitarán. En su variante reflejada, el script se entrega a través de un enlace manipulado. En la variante almacenada, el script queda persistido en el servidor y afecta a todos los visitantes. El XSS basado en DOM ocurre enteramente en el navegador, sin involucrar al servidor en la ejecución del payload.
+La falsificación de solicitudes entre sitios (CSRF) explota la sesión activa de un usuario autenticado para ejecutar acciones en su nombre sin su conocimiento. Si un usuario tiene sesión activa en su banco y visita una página maliciosa, esa página puede hacer que su navegador envíe una solicitud de transferencia al banco. Los tokens anti-CSRF son la contramedida estándar.
+</p>
+    <ul>
+        <li>Herramientas: ScoutSuite, Pacu y CloudBrute.</li>
+    </ul>
+</section>
+
+<section id="cap8" class="card">
+    <h2>Capítulo 8: Técnicas Posteriores a la Explotación</h2>
+
+    <h3>Persistencia y Canales de Control</h3>
+    <p>Comprometer un sistema es sólo el inicio. Para demostrar el impacto real de una vulnerabilidad en el contexto de una prueba de penetración, frecuentemente es necesario mantener ese acceso durante un período de tiempo. Esto se logra mediante shells inversos, donde el sistema comprometido establece la conexión hacia el evaluador, o mediante shells de enlace, donde el evaluador se conecta al sistema a través de un puerto en escucha.
+Las infraestructuras de comando y control (C2) permiten gestionar múltiples sistemas comprometidos simultáneamente. Algunas implementaciones disfrazan su tráfico como comunicaciones web convencionales o se apoyan en servicios legítimos como Dropbox o Twitter para evadir la detección. El mantenimiento de persistencia también puede lograrse mediante tareas programadas, daemons personalizados, puertas traseras adicionales o la creación de nuevas cuentas de usuario.
+</p>
+    <h3>Movimiento Lateral y Post-Explotación</h3>
+    <p>consiste en desplazarse desde el sistema inicialmente comprometido hacia otros activos de la red, especialmente aquellos que contienen información de alto valor. La segmentación de red correctamente implementada es la principal barrera contra esta técnica.
+Una estrategia frecuente en esta fase es la de ‘vivir de la tierra’ (Living off the Land): en lugar de instalar herramientas que puedan activar alertas, el evaluador utiliza las que ya están presentes en el sistema, como PowerShell, WMI o PsExec. Esto reduce drásticamente la probabilidad de detección por parte de soluciones antivirus o EDR.
+BloodHound es particularmente valioso en esta etapa: analiza las relaciones entre cuentas, grupos y permisos en Active Directory para identificar rutas de escalamiento de privilegios que de otra forma serían extremadamente difíciles de descubrir manualmente. La fase de post-explotación concluye con la cobertura de huellas: eliminación de logs, borrado de artefactos creados durante la prueba y, en casos que involucren exfiltración de datos, el uso de esteganografía para ocultar información dentro de archivos de imagen u otro tipo de contenido multimedia.
+</p>
+</section>
+
+<section id="cap9" class="card">
+    <h2>Capítulo 9: Informes y Comunicación</h2>
+    <p>El informe de una prueba de penetración es, en última instancia, el producto tangible que el cliente recibirá. Puede haberse realizado el trabajo técnico más riguroso del mundo, pero si el informe no logra comunicar los hallazgos de manera clara y accionable, ese esfuerzo pierde gran parte de su valor.
+Un buen informe debe hablarle simultáneamente a dos audiencias muy distintas: los ejecutivos, que necesitan entender el riesgo para el negocio sin entrar en detalles técnicos, y los equipos operativos, que necesitan instrucciones precisas y reproducibles para corregir los problemas. El resumen ejecutivo cumple la función para los primeros; la sección de hallazgos detallados, para los segundos.
+Cada vulnerabilidad debe calificarse usando el CVSS y acompañarse de evidencia concreta: capturas de pantalla, pasos para reproducirla y, cuando corresponda, demostración de que fue explotada exitosamente. Un hallazgo sin evidencia suficiente no resulta convincente y puede ser cuestionado.
+La confidencialidad del informe debe tratarse con el máximo cuidado: distribuirse únicamente a quienes corresponde, registrarse en un sistema de seguimiento y destruirse adecuadamente una vez que haya cumplido su propósito. Si durante la prueba se descubre algo crítico, no puede esperarse al informe final para notificarlo; la comunicación debe ser inmediata.
+Una vez entregado el informe, aún resta una etapa fundamental: limpiar toda huella de la prueba en los sistemas del cliente, destruir los datos confidenciales recopilados durante la evaluación y estar disponible para responder preguntas de seguimiento o participar en re-evaluaciones.
+</p>
+</section>
+
+<section id="cap10" class="card">
+    <h2>Capítulo 10: Herramientas y Análisis de Código</h2>
+
+    <h3>Scripting y Programación</h3>
+    <p>La capacidad de programar no es un requisito absoluto para un evaluador de penetración, pero sí una ventaja competitiva significativa. Comprender el código permite modificar herramientas existentes para adaptarlas a situaciones específicas, escribir scripts propios para automatizar tareas repetitivas y, fundamentalmente, analizar código malicioso cuando es necesario.
+Los conceptos cubiertos incluyen estructuras de control (bucles, condicionales, operadores booleanos), estructuras de datos (JSON, diccionarios, arreglos, CSV) y el uso de bibliotecas externas. Los lenguajes más relevantes en este campo son Bash (para automatización en Linux), Python (flexible y con una amplia ecosistema de librerías de seguridad), Ruby (base de Metasploit), PowerShell (omnipresente en entornos Windows) y JavaScript (clave para ataques web y desarrollo de exploits de navegador).
+</p>
+    <h3>Catálogo de Herramientas</h3>
+    <ul>
+        <li><strong>Reconocimiento:</strong> Shodan, Maltego, Recon-ng, ExifTool, FOCA.</li>
+        <li><strong>Análisis de Vulnerabilidades:</strong> Nessus, OpenVAS, Nikto, SQLmap.</li>
+        <li><strong>Ataques de Credenciales:</strong> John the Ripper, Hashcat, Hydra, Mimikatz.</li>
+        <li><strong>Marcos y C2:</strong> Metasploit (msfconsole/Meterpreter), BeEF, Empire.</li>
+        <li><strong>Forense e Ingeniería Inversa:</strong> Ghidra, IDA, Wireshark, SIFT.</li>
+        <li><strong>Nube e Inalámbrico:</strong> ScoutSuite, Wifite2, EAPHammer, Reaver.</li>
+    </ul>
+</section>
+
+</main>
+
+<footer>
+    <p>Proyecto Académico - Ciberseguridad</p>
+</footer>
+
+</body>
+</html>
