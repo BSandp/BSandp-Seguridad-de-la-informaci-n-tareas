@@ -1,0 +1,117 @@
+PARTE 1 CONCEPTUAL
+En el hacking ético en el campo del footprinting ¿Qué es el reconocimiento activo y cuál es el reconocimiento pasivo?
+Reconocimiento Pasivo: Consiste en recopilar información sobre el objetivo sin interactuar directamente con él. El atacante usa fuentes públicas (OSINT), por lo que el objetivo no puede detectar la actividad.
+Reconocimiento Activo: Implica interacción directa con los sistemas del objetivo. Es más eficaz pero detectable, ya que genera tráfico hacia el sistema.
+
+¿Qué son los exploits , payloads y post exploits ?, por favor dar dos ejemplos de los conceptos expuestos.
+Exploit: Código o técnica que aprovecha una vulnerabilidad en un sistema para ganar acceso o provocar un comportamiento no esperado.
+Ejemplo 1: EternalBlue (MS17-010): Explota una vulnerabilidad en SMB de Windows.
+Ejemplo 2: Log4Shell (CVE-2021-44228): Explota la librería Log4j para ejecución remota de código.
+Payload: El "contenido malicioso" que se ejecuta una vez el exploit tiene éxito. Es lo que realmente hace el daño o da control al atacante.
+Ejemplo 1: Meterpreter: Shell avanzada de Metasploit que permite control remoto del sistema.
+Ejemplo 2: Reverse shell en Python que conecta la máquina víctima al atacante.
+Post-Exploit: acciones realizadas después de comprometer el sistema para mantener acceso, escalar privilegios o moverse lateralmente.
+Ejemplo 1: Volcado de hashes de contraseñas con Mimikatz (hashdump).
+Ejemplo 2: Creación de una puerta trasera (backdoor) o persistencia mediante tareas programadas.
+
+¿Para que sirve metasploit y cómo lo puedo usar en entornos reales para la visualización de diferentes eventos anormales?
+Metasploit es un framework de código abierto desarrollado por Rapid7 para pruebas de penetración. Permite descubrir vulnerabilidades, desarrollar y ejecutar exploits, y automatizar ataques de forma controlada.
+Componentes principales:
+msfconsole — interfaz principal de línea de comandos
+msfvenom — generador de payloads
+Módulos de exploits, auxiliares, post-explotación y encoders
+En entornos reales autorizados (laboratorios, red propia, bug bounty), Metasploit genera tráfico que puede monitorearse con herramientas como Wireshark, Splunk o Wazuh para observar cómo se ven los ataques desde la perspectiva defensiva.
+
+¿Cúales son las diferencias entre la criptografía clásica, cuántica y post cuántica?
+La criptografía clásica es la que usamos hoy en día de forma generalizada; se basa en problemas matemáticos difíciles de resolver, como la factorización de números primos grandes (RSA) o las curvas elípticas (ECC), y protege desde páginas web hasta transacciones bancarias. Su principal vulnerabilidad es que una computadora cuántica suficientemente potente podría resolver estos problemas en tiempo razonable, rompiendo los esquemas actuales.
+La criptografía cuántica, en cambio, no se basa en matemáticas difíciles sino en las leyes físicas de la mecánica cuántica. El ejemplo más conocido es la Distribución Cuántica de Claves (QKD), donde dos partes intercambian claves usando fotones polarizados; cualquier intento de interceptación altera físicamente las partículas y es inmediatamente detectable. Su seguridad es teóricamente absoluta, pero su implementación es costosa, requiere infraestructura especializada y actualmente solo opera en redes experimentales o de alcance limitado.
+Finalmente, la criptografía post-cuántica representa un enfoque intermedio y pragmático: son algoritmos diseñados para ejecutarse en computadoras clásicas (como las actuales), pero basados en problemas matemáticos que incluso una computadora cuántica tendría dificultades para resolver, como los retículos matemáticos o los códigos de corrección de errores. En 2024, el NIST finalizó la estandarización de los primeros algoritmos post-cuánticos, como CRYSTALS-Kyber y SPHINCS+, con miras a reemplazar gradualmente los sistemas vulnerables antes de que las computadoras cuánticas maduren lo suficiente para representar una amenaza real.
+
+¿Qué es el blockchain ?, ¿Para qué se utiliza actualmente en las criptomonedas
+Blockchain es una estructura de datos distribuida formada por bloques enlazados criptográficamente, donde cada bloque contiene un conjunto de transacciones y el hash del bloque anterior. Es inmutable, descentralizada y transparente.
+Características clave:
+•	Descentralización (no hay autoridad central)
+•	Inmutabilidad (los datos no pueden alterarse sin romper la cadena)
+•	Consenso distribuido (mecanismos como Proof of Work o Proof of Stake)
+•	Transparencia (cualquiera puede auditar la cadena)
+Uso en criptomonedas: En Bitcoin y otras criptomonedas, el blockchain actúa como el libro contable público de todas las transacciones. Cada transacción es verificada por la red de nodos, agrupada en un bloque, y añadida a la cadena de forma permanente, eliminando la necesidad de bancos o intermediarios.
+
+¿Qué protocolos y mecanismos de seguridad se usan en los sistemas biométricos de autenticación?
+
+Los sistemas biométricos identifican a una persona a través de características físicas únicas como la huella dactilar, el rostro, el iris o la voz. Para que sean confiables, combinan varios protocolos y mecanismos de seguridad que trabajan juntos en distintas etapas del proceso.
+El primer desafío es verificar que el dato proviene de una persona real y no de una fotografía o grabación. Para esto existe la detección de vida (Liveness Detection), una técnica que analiza detalles difíciles de falsificar como el parpadeo natural, la profundidad tridimensional del rostro o el calor de un dedo, evitando así los intentos de suplantación.
+Una vez capturado el dato biométrico, este nunca se almacena en su forma original. En cambio, se transforma en una representación matemática protegida mediante cifrado fuerte, técnica conocida como Cancelable Biometrics y Template Encryption. Si esa plantilla llegara a comprometerse, simplemente se regenera con una nueva transformación, a diferencia de una contraseña robada que ya no puede cambiarse en el cuerpo de una persona.
+La comparación entre el dato capturado y la plantilla guardada ocurre dentro de una zona aislada y protegida del propio dispositivo, conocida como TEE (Trusted Execution Environment). Esto significa que la información sensible nunca viaja por internet expuesta a interceptaciones. Complementando esto, el estándar FIDO2/WebAuthn garantiza que lo que sí se envía al servidor no es el dato biométrico en sí, sino únicamente una confirmación criptográfica de que la verificación fue exitosa.
+Finalmente, la mayoría de implementaciones serias añaden una capa de autenticación multifactor (MFA), combinando la biometría con un PIN o un token físico, de manera que vulnerar un solo elemento no sea suficiente para acceder al sistema. Todo el tráfico entre dispositivos se protege además con TLS 1.3, el protocolo de cifrado en tránsito más robusto disponible actualmente.
+
+PARTE 2 DISEÑO
+
+MATRIZ DE AMENAZAS BITCOIN CORE Y SU REPOSITORIO.
+1. 	vector de ataque: nodo completo 
+	Objetivo: nodo completo
+	técnica: Malware
+	Impacto: robo de fondos
+	Probabilidad: alta
+	Riesgo: critico 
+
+2. 	vector de ataque:  ataque de doble gasto
+	Objetivo: red bitcoin
+	técnica: control de hashrate
+	Impacto:  reversión  de transacciones
+	Probabilidad: media
+	Riesgo:  alta
+
+3. 	vector de ataque: credential harvesting github
+	Objetivo: repositorio
+	técnica: pishing a maintainers
+	Impacto: push de código malicioso con firma valida
+	Probabilidad: baja
+	Riesgo:  critico
+
+4. 	vector de ataque: censura de transacciones 
+	Objetivo: nodo victima
+	técnica: aislamiento de peers legitimos
+	Impacto: engaño sobre el estado de la blockchain
+	Probabilidad: alta
+	Riesgo:  critico
+
+5. 	vector de ataque: denegación de servicios DOS
+	Objetivo: nodo
+	técnica: flood de conexiones
+	Impacto: nodo fuera de linea
+	Probabilidad: alta 
+	Riesgo:  medio
+
+Informe sencillo que documente cada fase del hacking ético aplicado a lo visto en clase en un nodo Bitcoin simulado y al repositorio Bitcoin Core (revisar toda la documentación) 
+
+Introducción
+La revisión se centra en comprender como pueden presentarse vulnerabilides y como se pueden mitigar mediante buenas practicas de seguridad.
+
+Fase de reconocimiento
+esta fase la centre en recopilar información general sobre el funcionamiento del nodo bitcoin y sobre la estructura del repositorio bitcoin CORE, se logro revisar, documentación disponible, la organizacón de los archivos, la actividad del proyecto y algunos aspectos basicos de su funcionamiento; tambien se identifican servicios y puertos relacionados con el nodo simulado.
+se observo que al tratarse de un proyecto abierto y reconocido. existe una bastante exposición, lo que puede significar que un atacante podría tener información util simplemente de la documentación, del codigo fuente o de configuración que son publicas, por otra parte, se pudo observar que el nodo depende de varios componentes y librerias, convirtiendo esto en un riesgo si una de ellas falla.
+
+Fase de escaneo
+en esta fase se realizo un escaneo para buscar posibles tecnica en el entorno, en esta etapa se logro vlaidar configuraciones puertos abiertos, aspectos generales de sguridad del nodo simulado, tambiens e analizaron posibles problemas asociados con versiones desactualizadas o con configuraciones por defecto.
+los resultados nos muestarn que un nodo mal configurado puede exponer servicios innecesarios  o mantener accesos demasiados amplios; lo cual representa un riesgo que puede facilitar los intentos de intrusión o de manipulación de los sitemas, por otra parte, con el repositorio tambien se identifico la importacia de revisar cuidadosamente el codigo y sus dependencia para evitar la inclusión de errores o componentes que sea inseguros.
+
+fase de explotación 
+en esta fase se evaluaron escenarios teoricos de ataque basados en debilidades halladas, entre los posbles riesgo se considero accesos no autorizados al nodo, o manipulación de transacciones. y la posiblidad de introducir codigo malicioso en el repositorio. esta etapa se centro en analisar y no en at5acar, esto con el fin de comprender como podría afectar una vulnerabilidad aprovechada por un atacante.
+Con esto se concluye que en entornos sin controles adecuados, un nodo de bitcoin puede ser afectado en su integridad y disponibilidad, así mismo un repositorio publico sin revisión estricta de cambios puede convertirse en objetivo para los atacantes a la cadena de suministro del software.
+
+matriz general de amenazas
+durante la revisión se identificaron amenazas como acceso no autorizado, vulnerabilidades en el código, exposición de servicios innecesarios, manipulación de transacciones y posibles ataques al repositorio. estas pueden convertirse en un impacto critico en la confidencialidad, la integridad y la disponibilidad del sistema, así mismo la probabilidad de ocurrencia depende del nivel de exposición, de la actualización de software y la calidad de las configuraciones
+
+medidas de mitigación.
+como medida de reducción de riesgos, se recomienda mantener actualizado el nodo, limitar los accesos innecesarios,reforzar la autenticación y supervisar constantemente los eventos del sistema. es de vital importancia revisar el codigo, usar una autenticación robusta,  y verificar la procedencia de cada cambio antes de integrarlo al proyecto.
+Por otra aprte se sugiera trabajar en entornos de laboratorio cuiando se realicen pruebas de segruidad, ya que esto permite aprender y evaluar sin afectar la infraestructura real.
+
+conclusión 
+Áplicar la metodología de hacking etico permite estudiar de manera ordenada los posibles riesgos presentes en un nodo, a traves de fases como reconocimiento, escaneo, explotación y post-explotación, fue posible identificar vulnerabilidades potenciales y comprender su impacto.
+
+
+PARTE 3 EMPIRICA
+
+¿Qué tipo de encriptación se maneja en blockchain?
+En el ejemplo que realizamos, el blockchain que implementamos utiliza principalmente el algoritmo criptográfico SHA-256 , el cual corresponde a una funcion hash, este algoritmo permite generar el valor unico apartir de información contenida en cada bloque, como la marca de tiempo el mensaje, el indice y el hsah del bloque anterior .
+Con esto garantizamos la integridad de los datos, ya que cualquier modificación en la información produce un cambio completamente diferente en el hash, rompeidno la cadena. Debo resalta que si bien los blockchain reales tambien emplean criptografía de clave publica y privada junto con firmas digitales, en mi ejemplo unicamente se uso funciones de hash como base para asegurar la estructura y consistencia de la cadena de bloques
